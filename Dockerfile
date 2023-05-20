@@ -11,7 +11,7 @@ RUN rpm-ostree override remove \
 	gnome-shell-extension-background-logo
 
 RUN rpm-ostree install vte291-gtk4
-COPY usr /usr
+COPY console/builddir/install /
 
 RUN rpm-ostree override remove \
 	fedora-workstation-backgrounds \
