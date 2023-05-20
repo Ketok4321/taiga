@@ -13,11 +13,12 @@ RUN rpm-ostree override remove \
 RUN rpm-ostree install vte291-gtk4
 COPY usr /usr
 
-# Gnome wallpapers depend on fedora wallpapers so it's not possible to remove them using rpm-ostree
-RUN rm -rf \
-	/usr/share/backgrounds/f38 \
-	/usr/share/gnome-background-properties/f38.xml && \
-	rpm-ostree override remove fedora-workstation-backgrounds
+RUN rpm-ostree override remove \
+	fedora-workstation-backgrounds \
+	f38-backgrounds-gnome \
+	f38-backgrounds-base \
+	desktop-backgrounds-gnome \
+	gnome-backgrounds
 
 COPY backgrounds /usr/share/backgrounds/taiga
 COPY gnome-background-properties /usr/share/gnome-background-properties
