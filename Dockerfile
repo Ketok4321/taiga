@@ -1,3 +1,10 @@
+FROM fedora:38 as console
+RUN dnf install -y meson gcc gtk4-devel libadwaita-devel vte291-gtk4-devel libgtop2-devel gsettings-desktop-schemas-devel desktop-file-utils
+WORKDIR console
+COPY console .
+RUN meson setup builddir --prefix /usr
+RUN meson install -C builddir --destdir install
+
 FROM quay.io/fedora-ostree-desktops/silverblue:38 
 
 RUN rpm-ostree override remove \
@@ -11,7 +18,7 @@ RUN rpm-ostree override remove \
 	gnome-shell-extension-background-logo
 
 RUN rpm-ostree install vte291-gtk4
-COPY console/builddir/install /
+COPY --from=console console/builddir/install /
 
 RUN rpm-ostree override remove \
 	fedora-workstation-backgrounds \
