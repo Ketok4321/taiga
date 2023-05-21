@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+download_url=$(curl "https://extensions.gnome.org/extension-info/?uuid=$1&shell_version=$SHELL_VERSION" | jq -r ".download_url")
+curl -L "https://extensions.gnome.org$download_url" -o extension.zip
+unzip extension.zip -d "$1"
+chmod -R a+r "$1"
+rm extension.zip

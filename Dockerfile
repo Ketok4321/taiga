@@ -5,11 +5,24 @@ COPY console .
 RUN meson setup builddir --prefix /usr
 RUN meson install -C builddir --destdir install
 
+FROM quay.io/fedora-ostree-desktops/silverblue:38 as extensions
+COPY install-ext /usr/local/bin/install-ext
+WORKDIR extensions
+ENV SHELL_VERSION=44
+RUN install-ext blur-my-shell@aunetx #TODO: enable them
+RUN install-ext lockkeys@vaina.lt
+RUN install-ext clipboard-indicator@tudmotu.com 
+
 FROM quay.io/fedora-ostree-desktops/silverblue:38 
 
 RUN rpm-ostree override remove \
 	gnome-terminal \
-	gnome-terminal-nautilus \
+	gnome-terminal-nautilus
+
+RUN rpm-ostree install vte291-gtk4
+COPY --from=console console/builddir/install /
+
+RUN rpm-ostree override remove \
 	gnome-classic-session \
 	gnome-shell-extension-apps-menu	\
 	gnome-shell-extension-launch-new-instance \
@@ -17,8 +30,7 @@ RUN rpm-ostree override remove \
 	gnome-shell-extension-window-list \
 	gnome-shell-extension-background-logo
 
-RUN rpm-ostree install vte291-gtk4
-COPY --from=console console/builddir/install /
+COPY --from=extensions extensions /usr/share/gnome-shell/extensions
 
 RUN rpm-ostree override remove \
 	fedora-workstation-backgrounds \
