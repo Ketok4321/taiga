@@ -41,7 +41,7 @@ RUN rpm-ostree override remove \
 
 COPY backgrounds /usr/share/backgrounds/taiga
 COPY gnome-background-properties /usr/share/gnome-background-properties
-COPY 00-background /etc/dconf/db/distro.d/00-background
+COPY dconf /etc/dconf/db/distro.d
 RUN dconf update
 
 RUN ostree container commit

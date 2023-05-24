@@ -1,0 +1,7 @@
+[org/gnome/shell]
+
+enabled-extensions = ['blur-my-shell@aunetx', 'lockkeys@vaina.lt', 'clipboard-indicator@tudmotu.com']
+
+[org/gnome/shell/extensions/lockkeys]
+
+style = 'none'
