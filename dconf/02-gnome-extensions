@@ -1,7 +1,12 @@
 [org/gnome/shell]
 
-enabled-extensions = ['blur-my-shell@aunetx', 'lockkeys@vaina.lt', 'clipboard-indicator@tudmotu.com']
+enabled-extensions = ['blur-my-shell@aunetx', 'lockkeys@vaina.lt', 'clipboard-indicator@tudmotu.com', 'gtk3-theme-switcher@charlieqle']
 
 [org/gnome/shell/extensions/lockkeys]
 
 style = 'none'
+
+[org/gnome/shell/extensions/gtk3-theme-switcher]
+
+light = 'adw-gtk3'
+dark = 'adw-gtk3-dark'
