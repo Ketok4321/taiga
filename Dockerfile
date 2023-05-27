@@ -1,5 +1,5 @@
 FROM fedora:38 as mutable
-FROM quay.io/fedora-ostree-desktops/silverblue as immutable
+FROM quay.io/fedora-ostree-desktops/silverblue:38 as immutable
 
 FROM mutable as console
 RUN dnf install -y meson gcc gtk4-devel libadwaita-devel vte291-gtk4-devel libgtop2-devel gsettings-desktop-schemas-devel desktop-file-utils
