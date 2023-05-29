@@ -8,7 +8,8 @@ COPY console .
 RUN meson setup builddir --prefix /usr
 RUN meson install -C builddir --destdir install
 
-FROM immutable as extensions
+FROM mutable as extensions
+RUN dnf install -y unzip jq
 COPY install-ext /usr/local/bin/install-ext
 WORKDIR extensions
 ENV SHELL_VERSION=44
