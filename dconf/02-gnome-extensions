@@ -1,6 +1,6 @@
 [org/gnome/shell]
 
-enabled-extensions = ['blur-my-shell@aunetx', 'lockkeys@vaina.lt', 'clipboard-indicator@tudmotu.com', 'gtk3-theme-switcher@charlieqle']
+enabled-extensions = ['blur-my-shell@aunetx', 'lockkeys@vaina.lt', 'clipboard-indicator@tudmotu.com', 'gtk3-theme-switcher@charlieqle', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'custom-accent-colors@demiskp']
 
 [org/gnome/shell/extensions/lockkeys]
 
@@ -10,3 +10,12 @@ style = 'none'
 
 light = 'adw-gtk3'
 dark = 'adw-gtk3-dark'
+
+[org/gnome/shell/extensions/user-theme]
+
+name = 'Custom-Accent-Colors'
+
+[org/gnome/shell/extensions/custom-accent-colors]
+
+accent-color = 'green'
+theme-shell = true
