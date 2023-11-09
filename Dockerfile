@@ -1,10 +1,9 @@
 FROM quay.io/fedora-ostree-desktops/silverblue:39 as image
 
 FROM image as extensions
-RUN dnf install -y unzip jq
 COPY install-ext /usr/local/bin/install-ext
 WORKDIR extensions
-ENV SHELL_VERSION=44
+ENV SHELL_VERSION=45
 RUN install-ext blur-my-shell@aunetx
 RUN install-ext lockkeys@vaina.lt
 RUN install-ext clipboard-indicator@tudmotu.com 
