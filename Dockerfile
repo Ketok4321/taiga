@@ -1,10 +1,10 @@
 ARG FEDORA_VERSION=39
-ARG GNOME_VERSION=45
 
 FROM quay.io/fedora-ostree-desktops/silverblue:${FEDORA_VERSION} AS extensions
+ARG GNOME_VERSION=45
 COPY install-ext /usr/local/bin/install-ext
 WORKDIR extensions
-ENV SHELL_VERSION=${GNOME_VERSION}
+ENV SHELL_VERSION=$GNOME_VERSION
 RUN install-ext blur-my-shell@aunetx
 RUN install-ext lockkeys@vaina.lt
 RUN install-ext clipboard-indicator@tudmotu.com 
