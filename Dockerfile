@@ -1,14 +1,6 @@
-FROM fedora:38 as mutable
-FROM quay.io/fedora-ostree-desktops/silverblue:38 as immutable
+FROM quay.io/fedora-ostree-desktops/silverblue:39 as image
 
-FROM mutable as console
-RUN dnf install -y meson gcc gtk4-devel libadwaita-devel vte291-gtk4-devel libgtop2-devel gsettings-desktop-schemas-devel desktop-file-utils
-WORKDIR console
-COPY console .
-RUN meson setup builddir --prefix /usr
-RUN meson install -C builddir --destdir install
-
-FROM mutable as extensions
+FROM image as extensions
 RUN dnf install -y unzip jq
 COPY install-ext /usr/local/bin/install-ext
 WORKDIR extensions
@@ -20,39 +12,32 @@ RUN install-ext gtk3-theme-switcher@charlieqle
 RUN install-ext user-theme@gnome-shell-extensions.gcampax.github.com
 RUN install-ext custom-accent-colors@demiskp
 
-FROM immutable 
+FROM image 
 
 RUN rpm-ostree install \
+    vte291-gtk4 \
+    gnome-console \
 	distrobox \
 	adw-gtk3-theme
 
 RUN rpm-ostree override remove \
 	firefox \
-	firefox-langpacks
-
-RUN rpm-ostree override remove \
+	firefox-langpacks \
 	gnome-terminal \
-	gnome-terminal-nautilus
-
-RUN rpm-ostree install vte291-gtk4
-COPY --from=console console/builddir/install /
-
-RUN rpm-ostree override remove \
+	gnome-terminal-nautilus \
 	gnome-classic-session \
 	gnome-shell-extension-apps-menu	\
 	gnome-shell-extension-launch-new-instance \
 	gnome-shell-extension-places-menu \
 	gnome-shell-extension-window-list \
-	gnome-shell-extension-background-logo
-
-COPY --from=extensions extensions /usr/share/gnome-shell/extensions
-
-RUN rpm-ostree override remove \
+	gnome-shell-extension-background-logo \
 	fedora-workstation-backgrounds \
 	f38-backgrounds-gnome \
 	f38-backgrounds-base \
 	desktop-backgrounds-gnome \
 	gnome-backgrounds
+
+COPY --from=extensions extensions /usr/share/gnome-shell/extensions
 
 COPY backgrounds /usr/share/backgrounds/taiga
 COPY gnome-background-properties /usr/share/gnome-background-properties
