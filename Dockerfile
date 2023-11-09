@@ -1,9 +1,10 @@
-FROM quay.io/fedora-ostree-desktops/silverblue:39 as image
+ARG FEDORA_VERSION=39
+ARG GNOME_VERSION=45
 
-FROM image as extensions
+FROM quay.io/fedora-ostree-desktops/silverblue:${FEDORA_VERSION} AS extensions
 COPY install-ext /usr/local/bin/install-ext
 WORKDIR extensions
-ENV SHELL_VERSION=45
+ENV SHELL_VERSION=${GNOME_VERSION}
 RUN install-ext blur-my-shell@aunetx
 RUN install-ext lockkeys@vaina.lt
 RUN install-ext clipboard-indicator@tudmotu.com 
@@ -11,7 +12,7 @@ RUN install-ext gtk3-theme-switcher@charlieqle
 RUN install-ext user-theme@gnome-shell-extensions.gcampax.github.com
 RUN install-ext custom-accent-colors@demiskp
 
-FROM image 
+FROM quay.io/fedora-ostree-desktops/silverblue:${FEDORA_VERSION}
 
 RUN rpm-ostree install \
     vte291-gtk4 \
@@ -31,8 +32,8 @@ RUN rpm-ostree override remove \
 	gnome-shell-extension-window-list \
 	gnome-shell-extension-background-logo \
 	fedora-workstation-backgrounds \
-	f38-backgrounds-gnome \
-	f38-backgrounds-base \
+	f${FEDORA_VERSION}-backgrounds-gnome \
+	f${FEDORA_VERSION}-backgrounds-base \
 	desktop-backgrounds-gnome \
 	gnome-backgrounds
 
