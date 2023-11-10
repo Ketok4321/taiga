@@ -8,7 +8,6 @@ ENV SHELL_VERSION=$GNOME_VERSION
 RUN install-ext blur-my-shell@aunetx
 RUN install-ext lockkeys@vaina.lt
 RUN install-ext clipboard-indicator@tudmotu.com 
-RUN install-ext gtk3-theme-switcher@charlieqle
 RUN install-ext user-theme@gnome-shell-extensions.gcampax.github.com
 RUN install-ext custom-accent-colors@demiskp
 

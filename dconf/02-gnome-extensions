@@ -6,11 +6,6 @@ enabled-extensions = ['blur-my-shell@aunetx', 'lockkeys@vaina.lt', 'clipboard-in
 
 style = 'none'
 
-[org/gnome/shell/extensions/gtk3-theme-switcher]
-
-light = 'adw-gtk3'
-dark = 'adw-gtk3-dark'
-
 [org/gnome/shell/extensions/user-theme]
 
 name = 'Custom-Accent-Colors'
