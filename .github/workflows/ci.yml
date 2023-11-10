@@ -28,5 +28,5 @@ jobs:
           build-args: |
             FEDORA_VERSION=39
             GNOME_VERSION=45
-          tags: ghcr.io/taiga:latest
+          tags: ghcr.io/${{ github.repository }}:latest
           push: true
