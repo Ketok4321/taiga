@@ -1,9 +1,9 @@
-ARG FEDORA_VERSION=39
+ARG FEDORA_VERSION
 
 FROM quay.io/fedora-ostree-desktops/silverblue:${FEDORA_VERSION} AS extensions
-ARG GNOME_VERSION=45
 COPY install-ext /usr/local/bin/install-ext
 WORKDIR extensions
+ARG GNOME_VERSION
 ENV SHELL_VERSION=$GNOME_VERSION
 RUN install-ext blur-my-shell@aunetx
 RUN install-ext lockkeys@vaina.lt
@@ -20,6 +20,7 @@ RUN rpm-ostree install \
 	distrobox \
 	adw-gtk3-theme
 
+ARG FEDORA_VERSION
 RUN rpm-ostree override remove \
 	firefox \
 	firefox-langpacks \

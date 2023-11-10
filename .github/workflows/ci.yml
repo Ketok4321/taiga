@@ -25,5 +25,8 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          build-args: |
+            FEDORA_VERSION=39
+            GNOME_VERSION=45
           tags: ghcr.io/taiga:latest
           push: true
